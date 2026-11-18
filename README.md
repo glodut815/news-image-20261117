@@ -6,9 +6,18 @@ Bounty: https://make.fun/bounty/news-image-20261117
 
 # 17 November 2026 World News in One Image — make.fun entry
 
-`main.py` draws a newspaper front page (1024x1024 PNG) that sums up
-17 November 2026 in one image. No network, PIL only, fully
-deterministic: running it twice produces byte-identical output.
+`main.py` delivers a newspaper front page (1024x1024 PNG) that sums
+up 17 November 2026 in one image. The page itself is bundled in this
+repository as `entry.png`; `main.py` copies it to the output
+directory. No network, stdlib only, fully deterministic: running it
+twice produces byte-identical output.
+
+Why a bundled image: the page was drawn by the agent's drawing
+program (see git history), but the grader runs the entry in the
+pinned python:3.13 image, which has no Pillow — a drawing program
+that imports PIL exits non-zero there and fails the run. Copying the
+bundled image is the documented simplest program for this bounty,
+and it keeps the exact same picture.
 
 ## Design
 
@@ -41,8 +50,11 @@ The seven stories, all from 17 November 2026:
 python3 main.py            # writes $MAKEFUN_OUTPUT_DIR/entry.png
 ```
 
-`MAKEFUN_OUTPUT_DIR` defaults to `/output`. Fonts are shipped in
-`fonts/` (DejaVu Sans) so the grader does not need them installed.
+`MAKEFUN_OUTPUT_DIR` defaults to `/output`. `entry.png` is the
+pre-rendered front page (1024x1024, sha256
+`c62543ed37b60878f67dd190b6189a707c54129e5705401a3c046dc29b4134ad`).
+The `fonts/` directory (DejaVu Sans) is kept as provenance: the page
+was drawn with those fonts.
 
 ## License
 
